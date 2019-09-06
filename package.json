@@ -1,6 +1,6 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "sapper-tailwind-starter",
+  "description": "A starter template for Sapper apps.",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
