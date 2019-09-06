@@ -22,15 +22,6 @@ const onwarn = (warning, onwarn) =>
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/')
 
-/*
-const preprocess = getPreprocessor({
-  transformers: {
-    postcss: {
-      plugins: postcssPlugins() // Don't need purgecss because Svelte handle unused css for you.
-    }
-  }
-});
-*/
 const postCSSstylePreprocessor = sveltePreprocessPostcss()
 
 export default {
