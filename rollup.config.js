@@ -6,10 +6,8 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
 import pkg from './package.json'
-//import getPreprocessor from "svelte-preprocess";
 import sveltePreprocessPostcss from 'svelte-preprocess-postcss'
 import postcss from 'rollup-plugin-postcss'
-//import PurgeSvelte from "purgecss-from-svelte";
 import path from 'path'
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
@@ -19,6 +17,7 @@ const onwarn = (warning, onwarn) =>
   (warning.code === 'CIRCULAR_DEPENDENCY' &&
     /[/\\]@sapper[/\\]/.test(warning.message)) ||
   onwarn(warning)
+
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/')
 
