@@ -9,6 +9,7 @@ import pkg from './package.json'
 import sveltePreprocessPostcss from 'svelte-preprocess-postcss'
 import postcss from 'rollup-plugin-postcss'
 import path from 'path'
+
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
 const legacy = !!process.env.SAPPER_LEGACY_BUILD
@@ -73,6 +74,7 @@ export default {
           module: true,
         }),
     ],
+
     onwarn,
   },
 
