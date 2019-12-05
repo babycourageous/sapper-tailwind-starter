@@ -5,14 +5,13 @@
 </script>
 
 <style type="text/postcss">
-  main {
-    @apply relative bg-pink-400;
-    max-width: 56em;
+  .test-apply {
+    @apply w-3/5 mx-auto p-8;
   }
 </style>
 
 <Nav {segment} />
 
-<main class="my-0 mx-auto p-8">
+<main class="test-apply relative">
   <slot />
 </main>
