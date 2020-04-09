@@ -6,7 +6,7 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
 import pkg from './package.json'
-import sveltePreprocessPostcss from 'svelte-preprocess-postcss'
+import svelte_preprocess_postcss from 'svelte-preprocess-postcss'
 import postcss from 'rollup-plugin-postcss'
 import path from 'path'
 
@@ -18,8 +18,6 @@ const onwarn = (warning, onwarn) =>
   (warning.code === 'CIRCULAR_DEPENDENCY' &&
     /[/\\]@sapper[/\\]/.test(warning.message)) ||
   onwarn(warning)
-
-const postCSSstylePreprocessor = sveltePreprocessPostcss()
 
 export default {
   client: {
@@ -33,9 +31,16 @@ export default {
       svelte({
         dev,
         hydratable: true,
-        emitCss: true,
-        preprocess: { style: postCSSstylePreprocessor },
+        preprocess: { style: svelte_preprocess_postcss() },
+        // we'll extract any component CSS out into
+        // a separate file — better for performance
+        css: (css) => {
+          //css.write('public/build/bundle.css')
+          css.write(path.resolve(__dirname, './static/bundle.css'))
+        },
       }),
+      //postcss({ extract: 'public/build/tailwind.css' }),
+      postcss({ extract: path.resolve(__dirname, './static/tailwind.css') }),
       resolve({
         browser: true,
         dedupe: ['svelte'],
@@ -86,14 +91,20 @@ export default {
       svelte({
         generate: 'ssr',
         dev,
-        preprocess: { style: postCSSstylePreprocessor },
+        preprocess: { style: svelte_preprocess_postcss() },
+        // we'll extract any component CSS out into
+        // a separate file — better for performance
+        css: (css) => {
+          //css.write('public/build/bundle.css')
+          css.write(path.resolve(__dirname, './static/bundle.css'))
+        },
       }),
       resolve({
         dedupe: ['svelte'],
       }),
       commonjs(),
       postcss({
-        extract: path.resolve(__dirname, './static/global.css'),
+        extract: path.resolve(__dirname, './static/tailwind.css'),
       }),
     ],
     external: Object.keys(pkg.dependencies).concat(
