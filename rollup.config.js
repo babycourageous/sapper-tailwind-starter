@@ -19,9 +19,6 @@ const onwarn = (warning, onwarn) =>
     /[/\\]@sapper[/\\]/.test(warning.message)) ||
   onwarn(warning)
 
-const dedupe = (importee) =>
-  importee === 'svelte' || importee.startsWith('svelte/')
-
 const postCSSstylePreprocessor = sveltePreprocessPostcss()
 
 export default {
@@ -41,7 +38,7 @@ export default {
       }),
       resolve({
         browser: true,
-        dedupe,
+        dedupe: ['svelte'],
       }),
       commonjs(),
 
@@ -92,7 +89,7 @@ export default {
         preprocess: { style: postCSSstylePreprocessor },
       }),
       resolve({
-        dedupe,
+        dedupe: ['svelte'],
       }),
       commonjs(),
       postcss({
