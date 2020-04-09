@@ -1,6 +1,10 @@
+<script>
+  let test = true
+</script>
+
 <style type="text/postcss">
   .about {
-    @apply pl-4 border-l-4 border-green-500;
+    @apply pl-4 border-l-4;
   }
 </style>
 
@@ -12,4 +16,6 @@
   About this site
 </h1>
 
-<p class="about">This is the 'about' page. There's not much here.</p>
+<p class="about" class:border-green-500={test}>
+  This is the 'about' page. There's not much here.
+</p>
