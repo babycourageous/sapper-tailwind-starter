@@ -1,9 +1,3 @@
-<style type="text/postcss">
-  img {
-    height: 450px;
-  }
-</style>
-
 <svelte:head>
   <title>Sapper project template</title>
 </svelte:head>
@@ -27,3 +21,9 @@
     </strong>
   </p>
 </div>
+
+<style type="text/postcss">
+  img {
+    height: 450px;
+  }
+</style>
