@@ -6,7 +6,7 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
 import pkg from './package.json'
-import svelte_preprocess_postcss from 'svelte-preprocess-postcss'
+import autoPreprocess from 'svelte-preprocess'
 import postcss from 'rollup-plugin-postcss'
 import path from 'path'
 
@@ -31,7 +31,7 @@ export default {
       svelte({
         dev,
         hydratable: true,
-        preprocess: { style: svelte_preprocess_postcss() },
+        preprocess: autoPreprocess({ postcss: true }),
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: (css) => {
@@ -91,7 +91,7 @@ export default {
       svelte({
         generate: 'ssr',
         dev,
-        preprocess: { style: svelte_preprocess_postcss() },
+        preprocess: autoPreprocess({ postcss: true }),
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: (css) => {
