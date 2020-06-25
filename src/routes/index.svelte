@@ -4,7 +4,7 @@
 
 <div class="test-apply flex flex-col items-center">
 
-  <h1 class="font-thin text-6xl text-teal-600 uppercase leading-none">
+  <h1 class="font-thin text-6xl text-orange-600 uppercase leading-none">
     Great success!
   </h1>
 
@@ -16,7 +16,7 @@
   <p>
     <strong>
       Try editing this file
-      <span class="text-teal-600">(src/routes/index.svelte)</span>
+      <span class="text-orange-600">(src/routes/index.svelte)</span>
       to test live reloading.
     </strong>
   </p>

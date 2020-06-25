@@ -27,7 +27,7 @@
 
 <style type="text/postcss">
   nav {
-    @apply font-light px-4 border-b border-teal-400;
+    @apply font-light px-4 border-b border-orange-400;
   }
   .selected {
     position: relative;
@@ -35,7 +35,7 @@
   }
 
   .selected::after {
-    @apply bg-teal-600;
+    @apply bg-orange-600;
     position: absolute;
     content: '';
     width: calc(100% - 1em);

@@ -6,11 +6,11 @@
   <title>About</title>
 </svelte:head>
 
-<h1 class="font-thin text-6xl text-teal-600 uppercase leading-none">
+<h1 class="font-thin text-6xl text-orange-600 uppercase leading-none">
   About this site
 </h1>
 
-<p class="about" class:border-green-500={test}>
+<p class="about" class:border-orange-500={test}>
   This is the 'about' page. There's not much here.
 </p>
 
