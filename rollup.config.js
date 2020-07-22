@@ -1,14 +1,12 @@
 import resolve from '@rollup/plugin-node-resolve'
-import replace from 'rollup-plugin-replace'
+import replace from '@rollup/plugin-replace'
 import commonjs from '@rollup/plugin-commonjs'
 import svelte from 'rollup-plugin-svelte'
-import babel from 'rollup-plugin-babel'
+import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
+import autoPreprocess from 'svelte-preprocess'
 import pkg from './package.json'
-import svelte_preprocess_postcss from 'svelte-preprocess-postcss'
-import postcss from 'rollup-plugin-postcss'
-import path from 'path'
 
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
@@ -31,16 +29,12 @@ export default {
       svelte({
         dev,
         hydratable: true,
-        preprocess: { style: svelte_preprocess_postcss() },
-        // we'll extract any component CSS out into
-        // a separate file — better for performance
-        css: (css) => {
-          //css.write('public/build/bundle.css')
-          css.write(path.resolve(__dirname, './static/bundle.css'))
-        },
+        // css: (css) => {
+        //   css.write(path.resolve(__dirname + 'static/bundle.css'))
+        // },
+        emitCss: true,
+        preprocess: autoPreprocess({ postcss: true }),
       }),
-      //postcss({ extract: 'public/build/tailwind.css' }),
-      postcss({ extract: path.resolve(__dirname, './static/tailwind.css') }),
       resolve({
         browser: true,
         dedupe: ['svelte'],
@@ -50,7 +44,7 @@ export default {
       legacy &&
         babel({
           extensions: ['.js', '.mjs', '.html', '.svelte'],
-          runtimeHelpers: true,
+          babelHelpers: 'runtime',
           exclude: ['node_modules/@babel/**'],
           presets: [
             [
@@ -77,6 +71,7 @@ export default {
         }),
     ],
 
+    preserveEntrySignatures: false,
     onwarn,
   },
 
@@ -91,26 +86,20 @@ export default {
       svelte({
         generate: 'ssr',
         dev,
-        preprocess: { style: svelte_preprocess_postcss() },
-        // we'll extract any component CSS out into
-        // a separate file — better for performance
-        css: (css) => {
-          //css.write('public/build/bundle.css')
-          css.write(path.resolve(__dirname, './static/bundle.css'))
-        },
+        preprocess: autoPreprocess({ postcss: true }),
       }),
+
       resolve({
         dedupe: ['svelte'],
       }),
       commonjs(),
-      postcss({
-        extract: path.resolve(__dirname, './static/tailwind.css'),
-      }),
     ],
     external: Object.keys(pkg.dependencies).concat(
       require('module').builtinModules ||
         Object.keys(process.binding('natives'))
     ),
+
+    preserveEntrySignatures: 'strict',
     onwarn,
   },
 
@@ -126,6 +115,8 @@ export default {
       commonjs(),
       !dev && terser(),
     ],
+
+    preserveEntrySignatures: false,
     onwarn,
   },
 }

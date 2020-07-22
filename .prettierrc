@@ -2,5 +2,7 @@
   "singleQuote": true,
   "semi": false,
   "trailingComma": "es5",
-  "plugins": ["svelte"]
+  "plugins": ["svelte"],
+  "svelteSortOrder" : "scripts-markup-styles",
+  "svelteBracketNewLine": true
 }

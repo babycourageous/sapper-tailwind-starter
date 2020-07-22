@@ -4,14 +4,12 @@
   export let segment
 </script>
 
-<style type="text/postcss">
-  .test-apply {
-    @apply w-3/5 mx-auto p-8;
-  }
-</style>
-
 <Nav {segment} />
 
-<main class="test-apply relative">
+<main class="relative w-3/5 mx-auto p-8">
   <slot />
 </main>
+
+<style type="text/postcss" global>
+  @import '../tailwind.css';
+</style>

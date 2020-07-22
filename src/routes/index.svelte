@@ -1,16 +1,10 @@
-<style type="text/postcss">
-  img {
-    height: 450px;
-  }
-</style>
-
 <svelte:head>
   <title>Sapper project template</title>
 </svelte:head>
 
-<div class="test-apply flex flex-col items-center">
+<div class="flex flex-col items-center">
 
-  <h1 class="font-thin text-6xl text-teal-600 uppercase leading-none">
+  <h1 class="test font-thin text-6xl text-orange-600 uppercase leading-none">
     Great success!
   </h1>
 
@@ -22,8 +16,17 @@
   <p>
     <strong>
       Try editing this file
-      <span class="text-teal-600">(src/routes/index.svelte)</span>
+      <span class="text-orange-600">(src/routes/index.svelte)</span>
       to test live reloading.
     </strong>
   </p>
 </div>
+
+<style type="text/postcss">
+  .test {
+    @apply mt-16;
+  }
+  img {
+    height: 450px;
+  }
+</style>
