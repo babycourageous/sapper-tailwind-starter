@@ -1,14 +1,12 @@
 import resolve from '@rollup/plugin-node-resolve'
-import replace from 'rollup-plugin-replace'
+import replace from '@rollup/plugin-replace'
 import commonjs from '@rollup/plugin-commonjs'
 import svelte from 'rollup-plugin-svelte'
-import babel from 'rollup-plugin-babel'
+import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
-import pkg from './package.json'
 import autoPreprocess from 'svelte-preprocess'
-import postcss from 'rollup-plugin-postcss'
-import path from 'path'
+import pkg from './package.json'
 
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
