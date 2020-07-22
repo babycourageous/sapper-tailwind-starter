@@ -15,7 +15,9 @@
 </p>
 
 <style type="text/postcss">
-  .about {
+  p {
     @apply pl-4 border-l-4;
+    border-left-width: 4px;
+    border-left-style: solid;
   }
 </style>

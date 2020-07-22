@@ -2,9 +2,9 @@
   <title>Sapper project template</title>
 </svelte:head>
 
-<div class="test-apply flex flex-col items-center">
+<div class="flex flex-col items-center">
 
-  <h1 class="font-thin text-6xl text-orange-600 uppercase leading-none">
+  <h1 class="test font-thin text-6xl text-orange-600 uppercase leading-none">
     Great success!
   </h1>
 
@@ -23,6 +23,9 @@
 </div>
 
 <style type="text/postcss">
+  .test {
+    @apply mt-16;
+  }
   img {
     height: 450px;
   }
