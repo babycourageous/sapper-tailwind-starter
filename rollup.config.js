@@ -29,16 +29,12 @@ export default {
       svelte({
         dev,
         hydratable: true,
+        // css: (css) => {
+        //   css.write(path.resolve(__dirname + 'static/bundle.css'))
+        // },
+        emitCss: true,
         preprocess: autoPreprocess({ postcss: true }),
-        // we'll extract any component CSS out into
-        // a separate file — better for performance
-        css: (css) => {
-          //css.write('public/build/bundle.css')
-          css.write(path.resolve(__dirname, './static/bundle.css'))
-        },
       }),
-      //postcss({ extract: 'public/build/tailwind.css' }),
-      postcss({ extract: path.resolve(__dirname, './static/tailwind.css') }),
       resolve({
         browser: true,
         dedupe: ['svelte'],
@@ -48,7 +44,7 @@ export default {
       legacy &&
         babel({
           extensions: ['.js', '.mjs', '.html', '.svelte'],
-          runtimeHelpers: true,
+          babelHelpers: 'runtime',
           exclude: ['node_modules/@babel/**'],
           presets: [
             [
@@ -75,6 +71,7 @@ export default {
         }),
     ],
 
+    preserveEntrySignatures: false,
     onwarn,
   },
 
@@ -90,25 +87,19 @@ export default {
         generate: 'ssr',
         dev,
         preprocess: autoPreprocess({ postcss: true }),
-        // we'll extract any component CSS out into
-        // a separate file — better for performance
-        css: (css) => {
-          //css.write('public/build/bundle.css')
-          css.write(path.resolve(__dirname, './static/bundle.css'))
-        },
       }),
+
       resolve({
         dedupe: ['svelte'],
       }),
       commonjs(),
-      postcss({
-        extract: path.resolve(__dirname, './static/tailwind.css'),
-      }),
     ],
     external: Object.keys(pkg.dependencies).concat(
       require('module').builtinModules ||
         Object.keys(process.binding('natives'))
     ),
+
+    preserveEntrySignatures: 'strict',
     onwarn,
   },
 
@@ -124,6 +115,8 @@ export default {
       commonjs(),
       !dev && terser(),
     ],
+
+    preserveEntrySignatures: false,
     onwarn,
   },
 }
